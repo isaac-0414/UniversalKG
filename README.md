@@ -116,9 +116,6 @@ I did this research project in my spare time, apart from my commitments to my st
      ```
    2) Run `python3 qa.py` if you are using MacOS and `python qa.py` if you are on a Windows machine.
 
-## Collaboration
-If you want to collaborate with me on this research project, please contact me with zheng72@illinois.edu[zheng72@illinois.edu], and I will reply to you ASAP. Also, thank you Yun Wang for providing me some insights on this project. 
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
