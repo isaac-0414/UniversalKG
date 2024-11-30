@@ -3,10 +3,12 @@ import time
 from utils.kg_gen import *
 from KnowledgeGraph import *
 
+# change this to the source text you want to test upon
+source_document_path = '/examples/source2'
 
 if __name__ == '__main__':
     start_time = time.time()
-    with open ('source' , 'r') as f:
+    with open (source_document_path , 'r') as f:
         text = f.read()
     text_chunks = split_text(text, 6000, 1500, '.')
 

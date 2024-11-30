@@ -4,6 +4,8 @@ from utils.kg_gen import *
 from KnowledgeGraph import *
 from utils.gpt import gpt_chat
 
+question = "Who is the Chancellor of UIUC from 2015-2016?"
+kg_path = './kg_save/knowledge_graph.pkl'
 
 
 def kg_qa (question: str, knowledge_graph:KnowledgeGraph):
@@ -165,10 +167,8 @@ def kg_qa (question: str, knowledge_graph:KnowledgeGraph):
 if __name__ == '__main__':
     start_time = time.time()
 
-    question = "Who is the Chancellor of UIUC from 2015-2016?"
-
     # Read knowledge graph from the pkl file
-    with open('./kg_save/knowledge_graph.pkl', 'rb') as file:
+    with open(kg_path, 'rb') as file:
        knowledge_graph: KnowledgeGraph = pickle.load(file)
 
     messages = [{"role": "system", "content": "I have a QA engine based on knowledge graph. It only accepts questions about the name of one or more entities given other information, relation between two entities, attributes of an entity, and attributes of a relation. \n\nYou will be given a question. Can you list all the questions that my QA engine accepts and that combining answers to them gives answer to this question?\n\nYour output should be in this list format: [\"question1\", \"question2\", ...]"}, {"role": "user", "content": question}]
