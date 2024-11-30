@@ -9,7 +9,7 @@
 - [Method](#method)
   - [UKG Generation](#ukg-generation)
   - [UKG Querying](#ukg-querying)
-  - [UKG Ontology(Type)](#ukg-ontology)
+  - [UKG Ontology(Type)](#ukg-ontologytype)
 - [Experiment](#experiment)
 - [Folder / File Descriptions](#folder--file-descriptions)
 - [Usage](#usage)
@@ -48,9 +48,14 @@ The querying framework of UKG is designed to deliver precise information retriev
 1. **Question Classification**: I will first classify the incoming question into 2 categories, whether it is a "Basic Question" or an "Advanced Question".
    1) **Basic Question**: A basic question is a question about ONE entity, relationship, or attribute. I will further classify the quesiton into an "Entity Quesiton", "Relationship Question" and "Attribute Question".
    2) **Advanced Quesiton**: An advanced question can be broken down into multiple Basic Question. I will process each Basic Question and combine the result together into the final result.
-2. **Entity Question**: Below is an example how I deal with an entity question, where I first rephrase the question to use "[ENTITY]" to replace the Entity of interest, and process this rephrased question into a small UKG, and collect all the other entites in this small UKG, as well as their path to the target Entity. Then we access the large UKG the serves as the knowledge base, locating each of those "other entities" (with both direct match and texual+node embedding), and do a DFS pattern path matching to go from those entities to a candidate target entity following the path we found in the small UKG. Normally, after the process there should be only one candidate entity, if there is more than one, I will find use the one from the path that has the higher cosine similarity with the path in small UKG.
-3. **Relationship Question**: A relationship should only contain two entities and asks about the relationship between them. So we just find those two entities, locate them in the larger KG, and get information about relationship between them, an example of this type of question shown below
-4. **Attribute Question**: This type of question can be complicated, currently I only explored the most straightforward type of it, as shown below in this example.
+2. **Entity Question**: Below is an example how I deal with an entity question, where I first rephrase the question to use "[ENTITY]" to replace the Entity of interest, and process this rephrased question into a small UKG, and collect all the other entites in this small UKG, as well as their path to the target Entity. Then we access the large UKG the serves as the knowledge base, locating each of those "other entities" (with both direct match and texual+node embedding), and do a DFS pattern path matching to go from those entities to a candidate target entity following the path we found in the small UKG. Normally, after the process there should be only one candidate entity, if there is more than one, I will find use the one from the path that has the higher cosine similarity with the path in small UKG.<br/>
+<p align="center"><img src="/images/UKG-entity.png" width=70%, alt="Entity question example"></p>
+
+3. **Relationship Question**: A relationship should only contain two entities and asks about the relationship between them. So we just find those two entities, locate them in the larger KG, and get information about relationship between them, an example of this type of question shown below.<br/>
+<p align="center"><img src="/images/UKG-relation.png" width=30%, alt="Relationship question example"></p>
+
+5. **Attribute Question**: This type of question can be complicated, currently I only explored the two most straightforward type of it, as shown below in this example.<br/>
+<p align="center"><img src="/images/UKG-attribute.png" width=70%, alt="Attributes question example"></p>
 
 ### UKG Ontology(Type)
 During the generation of the Universal Knowledge Graph, an ontology(type) system is also generated to categorize and label each entity with a specific type. This ontological framework resembles the class structure in computer science. For instance, "BMW" is categorized under the "Car Manufacturer" class, which is a subset of the "Organization" class, ultimately inheriting from the "Thing" class. Although the current implementation is limited to generating a knowledge graph from a single text segment, future enhancements aim to enable scalability. This would allow for the expansion of both the knowledge graph and its concomitant ontology system.
